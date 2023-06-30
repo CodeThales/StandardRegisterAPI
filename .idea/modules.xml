@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/StandardRegisterAPI.iml" filepath="$PROJECT_DIR$/.idea/StandardRegisterAPI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/registerAPI/registerAPI.iml" filepath="$PROJECT_DIR$/registerAPI/registerAPI.iml" />
     </modules>
   </component>
 </project>
