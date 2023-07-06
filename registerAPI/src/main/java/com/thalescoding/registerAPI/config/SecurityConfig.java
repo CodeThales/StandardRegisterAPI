@@ -1,5 +1,6 @@
 package com.thalescoding.registerAPI.config;
 
+import com.thalescoding.registerAPI.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,10 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    //Validação de segurança em memória
+    @Autowired
+    private UserDetailServiceImpl userDetailService;
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -37,10 +41,20 @@ public class SecurityConfig {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(new BCryptPasswordEncoder().encode("123"))
-                .roles("ADMIN");
+
+        //Autenticação de segurança em Banco
+        auth.userDetailsService(userDetailService)
+                        .passwordEncoder(new BCryptPasswordEncoder());
+
+
+        //Autenticação de segurança em memória
+//        auth.inMemoryAuthentication()
+//                .withUser("john@gmail.com")
+//                .password(new BCryptPasswordEncoder().encode("$2a$12$ayIKpNFysmse/wbLZUXFMupPXcb8SkH373bENmbSR/f8CgvOE.A0C"))
+//                .roles("ADMIN");
+
+        //john@gmail.com
+        //123
     }
 
     @Bean
